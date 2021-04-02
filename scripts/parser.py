@@ -9,5 +9,9 @@ columns = ['City', 'Customer type', 'Gender','Product line', 'Unit price',
 def Import(path, columns = columns):
     data = pd.read_csv(path)
     return data[columns]
-    
+
+def Mapper(dataFrame, column, mapKeys):
+    dataFrame[column] = dataFrame[column].map(mapKeys)
+    return dataFrame
+
 
