@@ -1,31 +1,24 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import streamlit as st
-from scripts.parser import Import, Mapper
 
-data = Import('dataSet/rawData')
+from scripts.parser import Application
+
+## Config ##
+st.set_page_config(layout='wide')
+
+app = Application()
+data = app.Import('dataSet/rawData')
 
 st.dataframe(data)
-
-C1, C2 = st.beta_columns([1,1])
+C1, C2, C3 = st.beta_columns([1, 1, 1])
 
 with C1:
-    gender = (data[data['Gender'] == 'Male'].count()[0],
-              data[data['Gender'] == 'Female'].count()[0])
+    gender = app.PiePlot(data, 'Gender', ["#001024", "#FF800B"], 'Participation of Gender in the dataset')
+    st.pyplot(gender)
 
-    fig, ax = plt.subplots()
-    plt.pie(gender, colors =["#001024", "#FF800B"], explode = (0.01, 0),
-        autopct = '%1.2f%%', shadow = True, startangle = 90, textprops = {'color': 'white'})
+with C2:
+    customer = app.PiePlot(data, 'Customer type', ["#001024", "#FF800B"], 'Types of Customers in the dataset')
+    st.pyplot(customer)
 
-    fig.patch.set_facecolor('blue')
-    fig.patch.set_alpha(0)
-
-    plt.title(f'Participation of Gender in the dataset', fontdict = {
-        'fontsize': 14, 
-        'fontweight': 'bold',
-        'color': 'white'
-    })
-
-    plt.legend(['Male', 'Female'])
-    st.pyplot(fig)
-    
+with C3:
+    city = app.PiePlot(data, 'City', ["#001024", "#FF800B", "#840032"], 'Cities participation in sales')
+    st.pyplot(city)
