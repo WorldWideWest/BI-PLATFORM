@@ -24,7 +24,7 @@ class Application:
             data.append(dataFrame[dataFrame[column] == index].count()[0])
                     
         fig, ax = plt.subplots()
-        plt.pie(data, colors = colors, autopct = '%1.2f%%', startangle = 90, textprops = {'color': 'white'})
+        plt.pie(data, colors = colors, autopct = '%1.2f%%', startangle = 90, textprops = {'color': 'white', 'fontsize': 14, 'fontweight': 'bold'})
                                 
         fig.patch.set_facecolor('blue')
         fig.patch.set_alpha(0)
@@ -35,5 +35,7 @@ class Application:
 
         return fig
 
-
+    def DateSum(self, dataFrame, column):
+        dataFrame[f'{ column }'] = pd.to_datetime(dataFrame[f'{ column }'], format='%m/%d/%Y')
+        return [date for date in dataFrame[f'{ column }']]
 
