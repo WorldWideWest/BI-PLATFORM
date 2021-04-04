@@ -20,13 +20,14 @@ if pageSelector == pageOptions[0]:
     ## Required data ## 
 
     data = app.Import('dataSet/rawData')
-    date = app.DateSum(data, 'Date')
-
+    sales = app.LineData(data, 'cogs')
 
     if showData:
         st.dataframe(data)
-
+        
+    ## Page Layout definitions ##
     C1, C2, C3, C4 = st.beta_columns([1, 1, 1, 1])
+    C5, C6 = st.beta_columns([1, 4])
 
     with C1:
         gender = app.PiePlot(data, 'Gender', ["#001024", "#FF800B"], 'Participation of Gender in the dataset')
@@ -44,6 +45,12 @@ if pageSelector == pageOptions[0]:
         payment = app.PiePlot(data, 'Payment', ["#001024", "#FF800B", "#840032"], 'Payment option')
         st.pyplot(payment)
 
+    ## Financial Statements - Total sales, tax, quantity, 
+    
+    with C5:
+        st.dataframe(sales)
+    with C6:
+        st.line_chart(sales)
 
 
 

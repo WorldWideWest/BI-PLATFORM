@@ -35,7 +35,11 @@ class Application:
 
         return fig
 
-    def DateSum(self, dataFrame, column):
-        dataFrame[f'{ column }'] = pd.to_datetime(dataFrame[f'{ column }'], format='%m/%d/%Y')
-        return [date for date in dataFrame[f'{ column }']]
-
+    def LineData(self, dataFrame, column):
+        dataFrame['Date'] = pd.to_datetime(dataFrame['Date'], format='%m/%d/%Y').dt.date
+        
+        data = dataFrame.groupby('Date').sum()
+        colIndex = data.columns.get_loc(column)
+        
+        return pd.DataFrame(data.iloc[:, colIndex])
+        
