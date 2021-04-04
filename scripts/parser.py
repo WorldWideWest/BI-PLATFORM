@@ -1,8 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-columns = ['City', 'Customer type', 'Gender','Product line', 'Unit price',
-           'Quantity', 'Tax 5%', 'Total', 'Date', 'Payment', 'cogs',
+columns = ['Date', 'City', 'Customer type', 'Gender','Product line', 'Unit price',
+           'Quantity', 'Tax 5%', 'Total', 'Payment', 'cogs',
            'gross margin percentage', 'gross income','Rating']
 
 
@@ -35,11 +35,14 @@ class Application:
 
         return fig
 
-    def LineData(self, dataFrame, column):
+    def LineData(self, dataFrame, column, name = 'Per Day Sales'):
         dataFrame['Date'] = pd.to_datetime(dataFrame['Date'], format='%m/%d/%Y').dt.date
         
         data = dataFrame.groupby('Date').sum()
         colIndex = data.columns.get_loc(column)
         
-        return pd.DataFrame(data.iloc[:, colIndex])
-        
+        return pd.DataFrame(data.iloc[:, colIndex]).rename(columns = {'cogs': name})
+
+    def GetUnique(self, dataFrame, column):
+        data = dataFrame.groupby(column).count()
+        return [value for value in data.index]

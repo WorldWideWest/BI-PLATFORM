@@ -25,9 +25,14 @@ if pageSelector == pageOptions[0]:
     if showData:
         st.dataframe(data)
         
-    ## Page Layout definitions ##
+    ## Page Layout declaration ##
     C1, C2, C3, C4 = st.beta_columns([1, 1, 1, 1])
-    C5, C6 = st.beta_columns([1, 4])
+    
+    C5, C6 = st.beta_columns([1, 4]) # Heading row
+    C7, C8 = st.beta_columns([1, 4])
+    
+    C9, C10 = st.beta_columns([1, 4]) # Heading row
+    C11, C12 = st.beta_columns([1, 4])
 
     with C1:
         gender = app.PiePlot(data, 'Gender', ["#001024", "#FF800B"], 'Participation of Gender in the dataset')
@@ -44,13 +49,46 @@ if pageSelector == pageOptions[0]:
     with C4:
         payment = app.PiePlot(data, 'Payment', ["#001024", "#FF800B", "#840032"], 'Payment option')
         st.pyplot(payment)
-
-    ## Financial Statements - Total sales, tax, quantity, 
     
     with C5:
-        st.dataframe(sales)
+        st.header("Data")
     with C6:
-        st.line_chart(sales)
+        st.header("Total Sales per Day")
+    with C7:
+        st.dataframe(sales)
+    with C8:
+        st.line_chart(sales, use_container_width = True)
+
+    with C9:
+        st.header("Filters")
+    with C10:
+        st.header(f"") # Auto generated header based on the filters applyed
+
+    with C11:
+        st.selectbox(
+            'Select the product',
+            (app.GetUnique(data, 'Product line')))
+        
+        st.selectbox(
+            'Select the type of the Customer',
+            (app.GetUnique(data, 'Customer type'))
+        )
+
+        st.selectbox(
+            'Select the Gender',
+            (app.GetUnique(data, 'Gender'))
+        )
+
+        st.selectbox(
+            'Select the City',
+            (app.GetUnique(data, 'Customer type'))
+        )
+
+        st.selectbox(
+            'Select the type of payment',
+            (app.GetUnique(data, 'Payment'))
+        )
+
 
 
 
