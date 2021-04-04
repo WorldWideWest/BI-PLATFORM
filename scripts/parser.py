@@ -45,4 +45,9 @@ class Application:
 
     def GetUnique(self, dataFrame, column):
         data = dataFrame.groupby(column).count()
-        return [value for value in data.index]
+
+        value = ['Any']
+        for val in data.index:
+            value.append(val)
+        return value
+        
