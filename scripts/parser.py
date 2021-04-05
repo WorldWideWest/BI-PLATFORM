@@ -51,7 +51,12 @@ class Application:
             value.append(val)
         return value
     
-    def Filter(self, dataFrame, city = 'all', customer = 'all', gender = 'all', product = 'all', payment = 'all'):
+    def Filter(self, dataFrame, columns, city = 'all', customer = 'all', gender = 'all', product = 'all', payment = 'all'):
+        defaultColumns = ["Date", "City", "Customer type", "Gender", "Product line", "Payment"]
+        
+        for col in columns:
+            defaultColumns.append(col)
+
         data = dataFrame
             
         if city.capitalize() != "All":
@@ -69,4 +74,4 @@ class Application:
         if payment.capitalize() != "All":
             data = data[data['Payment'] == payment]
 
-        return data
+        return data[defaultColumns] 

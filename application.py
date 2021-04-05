@@ -94,13 +94,30 @@ if pageSelector == pageOptions[0]:
             margin = st.checkbox("Show Gross Margin Records")
             rating = st.checkbox("Show Rating Records")
 
-        header = f"Data for the { city } City, with { customer } type Customer the Gender is { gender } and the Product line and Payment options are { product }, { payment }"
+            columns = [price, quantity, tax, total, cogs, margin, rating]
+            extraCols = []
+            if price:
+                extraCols.append('Unit price')
+            if quantity:
+                extraCols.append('Quantity')
+            if tax:
+                extraCols.append('Tax 5%')
+            if total:
+                extraCols.append('Total')
+            if cogs:
+                extraCols.append('cogs')
+            if margin:
+                extraCols.append('gross income')
+            if rating:
+                extraCols.append('Rating')
+
+            header = f"Data for the { city } City, with { customer } type Customer the Gender is { gender } and the Product line and Payment options are { product }, { payment }"
         
-        with C11:
-            st.header(header) # Auto generated header based on the filters applyed
-        
-        with C14:
-            st.dataframe(app.Filter(data, city, customer, gender, product, payment))
+            with C11:
+                st.header(header) # Auto generated header based on the filters applyed
+            
+            with C14:
+                st.dataframe(app.Filter(data, extraCols, city, customer, gender, product, payment), height = 365)
 
 
 
