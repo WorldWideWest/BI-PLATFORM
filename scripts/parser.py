@@ -52,23 +52,23 @@ class Application:
         return value
     
     def Filter(self, dataFrame, city = 'any', customer = 'any', gender = 'any', product = 'any', payment = 'any'):
-            filters = [city, customer, gender, product, payment]
+        filters = [city, customer, gender, product, payment]
+        
+        data = dataFrame
             
-            data = dataFrame
-                
-            if filters[0].capitalize() != "Any":
-                data = dataFrame[dataFrame['City'] == filters[0]]
-                                
-            if filters[1].capitalize() != "Any":
-                data = data[data['Customer type'] == filters[1]]
-                                                        
-            if filters[2].capitalize() != "Any":
-                data = data[data['Gender'] == filters[2]]
+        if filters[0].capitalize() != "Any":
+            data = dataFrame[dataFrame['City'] == filters[0]]
+                            
+        if filters[1].capitalize() != "Any":
+            data = data[data['Customer type'] == filters[1]]
+                                                    
+        if filters[2].capitalize() != "Any":
+            data = data[data['Gender'] == filters[2]]
 
-            if filters[3].capitalize() != "Any":
-                data = data[data['Product line'] == filters[3]]
+        if filters[3].capitalize() != "Any":
+            data = data[data['Product line'] == filters[3]]
 
-            if filters[4].capitalize() != "Any":
-                data = data[data['Payment'] == filters[4]]
+        if filters[4].capitalize() != "Any":
+            data = data[data['Payment'] == filters[4]]
 
-            return data
+        return data

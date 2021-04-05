@@ -78,11 +78,11 @@ if pageSelector == pageOptions[0]:
             (app.GetUnique(data, 'Gender')))
 
         product = st.selectbox(
-            'Select the product',
+            'Select Product Line',
             (app.GetUnique(data, 'Product line')))
 
         payment = st.selectbox(
-            'Select the type of payment',
+            'Select the type of Payment',
             (app.GetUnique(data, 'Payment')))
 
         with C12:
