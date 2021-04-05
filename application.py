@@ -6,6 +6,14 @@ from scripts.parser import Application
 
 ## Config ##
 st.set_page_config(layout='wide')
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
 app = Application()
 
 pageOptions = ('Preview premade project', 'Add your own data')
