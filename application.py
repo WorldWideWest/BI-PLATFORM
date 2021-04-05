@@ -67,7 +67,7 @@ if pageSelector == pageOptions[0]:
     with C11:
         city = st.selectbox(
             'Select the City',
-            (app.GetUnique(data, 'Customer type')))
+            (app.GetUnique(data, 'City')))
         
         customer = st.selectbox(
             'Select the type of the Customer',
@@ -85,6 +85,8 @@ if pageSelector == pageOptions[0]:
             'Select the type of payment',
             (app.GetUnique(data, 'Payment')))
 
+        with C12:
+            st.dataframe(app.Filter(data, city, customer, gender, product, payment))
 
 
 
