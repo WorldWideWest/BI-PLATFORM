@@ -65,29 +65,25 @@ if pageSelector == pageOptions[0]:
         st.header(f"") # Auto generated header based on the filters applyed
 
     with C11:
-        st.selectbox(
+        city = st.selectbox(
+            'Select the City',
+            (app.GetUnique(data, 'Customer type')))
+        
+        customer = st.selectbox(
+            'Select the type of the Customer',
+            (app.GetUnique(data, 'Customer type')))
+
+        gender = st.selectbox(
+            'Select the Gender',
+            (app.GetUnique(data, 'Gender')))
+
+        product = st.selectbox(
             'Select the product',
             (app.GetUnique(data, 'Product line')))
-        
-        st.selectbox(
-            'Select the type of the Customer',
-            (app.GetUnique(data, 'Customer type'))
-        )
 
-        st.selectbox(
-            'Select the Gender',
-            (app.GetUnique(data, 'Gender'))
-        )
-
-        st.selectbox(
-            'Select the City',
-            (app.GetUnique(data, 'Customer type'))
-        )
-
-        st.selectbox(
+        payment = st.selectbox(
             'Select the type of payment',
-            (app.GetUnique(data, 'Payment'))
-        )
+            (app.GetUnique(data, 'Payment')))
 
 
 
