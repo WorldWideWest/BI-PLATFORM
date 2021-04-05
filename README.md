@@ -13,6 +13,9 @@ The platform will be web based and will not require any logins or have any restr
 The deployment will be done on Heroku and this repo will be the base for the deployment. Also on this repo will be setuped automated tests using Github Actions.
 
 
+![alt text](https://github.com/WorldWideWest/BI-PLATFORM/blob/main/screencapture-172-21-227-193-8501-2021-04-05-20_31_33.png?raw=true)
+
+
 
 ## Technologies
 
