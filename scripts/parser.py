@@ -46,29 +46,27 @@ class Application:
     def GetUnique(self, dataFrame, column):
         data = dataFrame.groupby(column).count()
 
-        value = ['Any']
+        value = ['All']
         for val in data.index:
             value.append(val)
         return value
     
-    def Filter(self, dataFrame, city = 'any', customer = 'any', gender = 'any', product = 'any', payment = 'any'):
-        filters = [city, customer, gender, product, payment]
-        
+    def Filter(self, dataFrame, city = 'all', customer = 'all', gender = 'all', product = 'all', payment = 'all'):
         data = dataFrame
             
-        if filters[0].capitalize() != "Any":
-            data = dataFrame[dataFrame['City'] == filters[0]]
+        if city.capitalize() != "All":
+            data = dataFrame[dataFrame['City'] == city]
                             
-        if filters[1].capitalize() != "Any":
-            data = data[data['Customer type'] == filters[1]]
+        if customer.capitalize() != "All":
+            data = data[data['Customer type'] == customer]
                                                     
-        if filters[2].capitalize() != "Any":
-            data = data[data['Gender'] == filters[2]]
+        if gender.capitalize() != "All":
+            data = data[data['Gender'] == gender]
 
-        if filters[3].capitalize() != "Any":
-            data = data[data['Product line'] == filters[3]]
+        if product.capitalize() != "All":
+            data = data[data['Product line'] == product]
 
-        if filters[4].capitalize() != "Any":
-            data = data[data['Payment'] == filters[4]]
+        if payment.capitalize() != "All":
+            data = data[data['Payment'] == payment]
 
         return data

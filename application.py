@@ -31,9 +31,11 @@ if pageSelector == pageOptions[0]:
     C5, C6 = st.beta_columns([1, 4]) # Heading row
     C7, C8 = st.beta_columns([1, 4])
     
-    C9, C10 = st.beta_columns([1, 4]) # Heading row
-    C11, C12 = st.beta_columns([1, 4])
-
+    C9, C10, C11 = st.beta_columns([1, 1, 2]) # Heading row
+    C12, C13, C14 = st.beta_columns([1, 1, 2])
+    
+    #header = f""
+    
     with C1:
         gender = app.PiePlot(data, 'Gender', ["#001024", "#FF800B"], 'Participation of Gender in the dataset')
         st.pyplot(gender)
@@ -61,10 +63,8 @@ if pageSelector == pageOptions[0]:
 
     with C9:
         st.header("Filters")
-    with C10:
-        st.header(f"") # Auto generated header based on the filters applyed
-
-    with C11:
+   
+    with C12:
         city = st.selectbox(
             'Select the City',
             (app.GetUnique(data, 'City')))
@@ -81,11 +81,25 @@ if pageSelector == pageOptions[0]:
             'Select Product Line',
             (app.GetUnique(data, 'Product line')))
 
-        payment = st.selectbox(
-            'Select the type of Payment',
-            (app.GetUnique(data, 'Payment')))
+        with C13:
+            payment = st.selectbox(
+                'Select the type of Payment',
+                (app.GetUnique(data, 'Payment')))
 
-        with C12:
+            price = st.checkbox("Show Unit Price Records")
+            quantity = st.checkbox("Show Quantity Records")
+            tax = st.checkbox("Show Tax Records")
+            total = st.checkbox("Show Total Records")
+            cogs = st.checkbox("Show Total without Tax Records")
+            margin = st.checkbox("Show Gross Margin Records")
+            rating = st.checkbox("Show Rating Records")
+
+        header = f"Data for the { city } City, with { customer } type Customer the Gender is { gender } and the Product line and Payment options are { product }, { payment }"
+        
+        with C11:
+            st.header(header) # Auto generated header based on the filters applyed
+        
+        with C14:
             st.dataframe(app.Filter(data, city, customer, gender, product, payment))
 
 
