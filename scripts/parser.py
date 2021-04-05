@@ -35,13 +35,14 @@ class Application:
 
         return fig
 
-    def LineData(self, dataFrame, column, name = 'Per Day Sales'):
-        dataFrame['Date'] = pd.to_datetime(dataFrame['Date'], format='%m/%d/%Y').dt.date
-        
+    def LineData(self, dataFrame, columns):
+        dataFrame['Date'] = pd.to_datetime(dataFrame['Date']).dt.date
+
         data = dataFrame.groupby('Date').sum()
-        colIndex = data.columns.get_loc(column)
+        # colIndex = data.columns.get_loc(column)
+        colIndicies = [data.columns.get_loc(index) for index in columns]
         
-        return pd.DataFrame(data.iloc[:, colIndex]).rename(columns = {'cogs': name})
+        return pd.DataFrame(data.iloc[:, colIndicies])
 
     def GetUnique(self, dataFrame, column):
         data = dataFrame.groupby(column).count()
@@ -74,4 +75,5 @@ class Application:
         if payment.capitalize() != "All":
             data = data[data['Payment'] == payment]
 
-        return data[defaultColumns] 
+
+        return data[defaultColumns]
