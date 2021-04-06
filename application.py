@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import streamlit as st
+#import tensorflow as tf
 
+from sklearn.preprocessing import MinMaxScaler
 from scripts.parser import Application
 
 ## Config ##
@@ -15,6 +17,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 app = Application()
+scaler = MinMaxScaler()
 
 pageOptions = ('Preview premade project', 'Add your own data')
 pageSelector = st.sidebar.selectbox(
