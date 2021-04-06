@@ -81,8 +81,7 @@ class Application:
 
         return data[defaultColumns]
 
-    def Preprocessing(self, dataFrame, columnName = "cogs", trainingPct = 0.8):
-        scaler = MinMaxScaler()
+    def Split(self, dataFrame, columnName = "cogs", trainingPct = 0.8):
         
         colIndex = dataFrame.columns.get_loc(columnName)
         index = int(len(dataFrame) * trainingPct)
@@ -92,7 +91,7 @@ class Application:
     def TrainingSplit(self, trainingSet, days = 1):
         xTrain, yTrain = [], []
 
-        for i in range(days, trainingSet.shape[0])
+        for i in range(days, trainingSet.shape[0]):
             xTrain.append(trainingSet[i - days:i, 0])
             yTrain.append(trainingSet[i, 0])
 
@@ -107,5 +106,9 @@ class Application:
 
         return np.array(xTest), np.array(yTest)
 
-    #def GetInputs(self, )
-        
+    def GetInputs(self, trainingData, testingData, days = 1):
+        total = np.concatenate((trainingData, testingData), axis = 0)
+        return total[len(total) - len(testingData) - days: ]
+    
+    def Reshape(self, data, inputVariables):
+        return np.reshape(data, (data.shape[0], data.shape[1], inputVariables))
