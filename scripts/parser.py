@@ -1,5 +1,8 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+from sklearn.preprocessing import MinMaxScaler
 
 columns = ['Date', 'City', 'Customer type', 'Gender','Product line', 'Unit price',
            'Quantity', 'Tax 5%', 'Total', 'Payment', 'cogs',
@@ -77,3 +80,32 @@ class Application:
 
 
         return data[defaultColumns]
+
+    def Preprocessing(self, dataFrame, columnName = "cogs", trainingPct = 0.8):
+        scaler = MinMaxScaler()
+        
+        colIndex = dataFrame.columns.get_loc(columnName)
+        index = int(len(dataFrame) * trainingPct)
+
+        return np.array(dataFrame.iloc[:index, colIndex]), np.array(dataFrame.iloc[index:, colIndex]) # x, y Training Sets
+
+    def TrainingSplit(self, trainingSet, days = 1):
+        xTrain, yTrain = [], []
+
+        for i in range(days, trainingSet.shape[0])
+            xTrain.append(trainingSet[i - days:i, 0])
+            yTrain.append(trainingSet[i, 0])
+
+        return np.array(xTrain), np.array(yTrain)
+
+    def TestingSplit(self, inputs, days, dataLen):
+        xTest, yTest = [], []
+        
+        for i in range(days, days + dataLen):
+            xTest.append(inputs[i - days:i, 0])
+            yTest.append(inputs[i, 0])
+
+        return np.array(xTest), np.array(yTest)
+
+    #def GetInputs(self, )
+        
