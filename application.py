@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from scripts.parser import Application
 
 ## Config ##
-st.set_page_config(layout='wide')
+st.set_page_config(layout='wide', page_title='BI-PLATFORM')
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
